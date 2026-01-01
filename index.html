@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --dark-color: #0f172a;
+            --light-color: #f8fafc;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--light-color);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #201335 0%, #764ba2 100%);
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: transparent;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #201335 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="50" r="1" fill="white" opacity="0.1"/><circle cx="90" cy="30" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .lead {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .btn {
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 40%;
+            left: 70%;
+            animation-delay: 4s;
+        }
+
+        /* Buttons */
+        .btn-gradient {
+            background: var(--gradient);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            /*background: var(--light-color);*/
+        }
+
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skill-category {
+            margin-bottom: 3rem;
+        }
+
+        .skill-category-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1200px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: default;
+            display: inline-block;
+        }
+
+        .skill-tag:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+            border-color: transparent;
+        }
+
+        /* Projects Section */
+        .projects {
+           /* background: var(--light-color);*/
+        }
+
+        .project-card {
+            background: white;
+            color: var(--dark-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: var(--gradient);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+
+        .experience-item::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 15px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: linear-gradient(to bottom, var(--primary-color), transparent);
+        }
+
+        .experience-item:last-child::after {
+            display: none;
+        }
+
+        .experience-date {
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-color);
+            color: white;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .lead {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .experience-item {
+                padding-left: 2rem;
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Toumi Achref</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#experience">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1>Hi, I'm TOUMI ACHREF</h1>
+                        <p class="lead">Software and Data Engineering Student.</p>
+                        <p class="mb-4">
+                        I am a dedicated student with practical experience in software engineering, data engineering, and data science. I develop AI solutions and have hands-on expertise in machine learning and deep learning. I am also skilled in data pipeline automation and enjoy optimizing workflows. Passionate about learning new technologies, I thrive on tackling complex challenges and delivering impactful solutions.
+                        </p>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a href="#projects" class="btn btn-gradient">View My Work</a>
+                            <a href="#contact" class="btn btn-outline-custom">Get In Touch</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="hero-image mt-5 mt-lg-0">
+                        <i class="fas fa-code" style="font-size: 15rem; opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About Me</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="about-image text-center mb-4 mb-lg-0">
+                        <div class="bg-gradient mt-5 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 300px; height: 300px; background: var(--gradient);">
+                            <img src="me.jpg"
+                                style="width: 500px; height: 500px; object-fit: cover; border-radius: 50%;
+                                        box-shadow: 0 20px 40px rgba(0,0,0,0.25);">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="about-content">
+                        <p>I'm a passionate Software and Data Engineering student currently pursuing my degree with a focus on software development and data engineering. My journey in tech began with curiosity and has evolved into a deep commitment to creating innovative solutions.</p>
+                        
+                        <p>Through various internships and personal projects, I've gained hands-on experience in full-stack development, mobile applications, and modern frameworks ,also a solid knowlege in data manipulation and pipe lines. I believe in continuous learning and staying updated with the latest industry trends.</p>
+                        
+                        <p>When I'm not coding, you can find me contributing to open-source projects, attending tech meetups, or exploring new programming languages and frameworks.</p>
+                        
+                        <div class="mt-4">
+                            <h5>More Information:</h5>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-graduation-cap text-primary me-2"></i>Software and Data Engineering Student</li>
+                                <li><i class="fas fa-map-marker-alt text-primary me-2"></i> Location: Menzel Bourguiba, Bizert</li>
+                                <li><i class="fas fa-phone text-primary me-2"></i> Phone: +216 25509768</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">My Skills</h2>
+            <p class="text-center mb-5 animate-on-scroll" style="font-size: 1.1rem; max-width: 800px; margin: 0 auto 3rem;">Technologies and tools I've worked with throughout my learning journey and projects.</p>
+            
+            <div class="animate-on-scroll">
+                <div class="skill-category">
+                    <h5 class="skill-category-title">Frontend Development</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Angular</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Bootstrap</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h5 class="skill-category-title">Backend Development</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Java</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h5 class="skill-category-title">Database</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h5 class="skill-category-title">Machine Learning & AI</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Deep Learning</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">OpenCV</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h5 class="skill-category-title">Mobile Development</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Dart</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h5 class="skill-category-title">DevOps & Tools</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Docker</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h5 class="skill-category-title">Other Technologies</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Odoo</span>
+                        <span class="skill-tag">Data Engineering</span>
+                        <span class="skill-tag">IoT</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">JavaFX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">My Projects</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 animate-on-scroll">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-car-crash"></i>
+                        </div>
+                        <div class="project-content">
+                            <h5>Multi-Agent Road Anomaly Detection</h5>
+                            <p>An intelligent multi-agent system that detects road anomalies in real-time using computer vision and deep learning. Agents communicate via REST APIs to collaboratively process and classify road images.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">OpenCV</span>
+                                <span class="tech-badge">Deep Learning</span>
+                                <span class="tech-badge">YOLOv8n</span>
+                                <span class="tech-badge">Multi-Agent System</span>
+                                <span class="tech-badge">REST API</span>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://github.com/TOUMI-ACHREF/multi-agent-road-anomaly-detection" class="btn btn-gradient btn-sm me-2">View GitHub folder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 animate-on-scroll">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="project-content">
+                            <h5>Arabic Sentiment Analysis with LSTM</h5>
+                            <p>A deep learning solution that classifies Arabic text sentiment (e.g., positive vs. negative) using a Long Short‑Term Memory (LSTM) neural network. It includes Arabic text preprocessing and sequence modeling for accurate sentiment predictions.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">Deep Learning</span>
+                                <span class="tech-badge">LSTM</span>
+                                <span class="tech-badge">NLP</span>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://github.com/TOUMI-ACHREF/arabic-sentiment-analysis-with-LSTM" class="btn btn-gradient btn-sm me-2">View GitHub folder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 animate-on-scroll">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-house"></i>
+                        </div>
+                        <div class="project-content">
+                            <h5>Real Estate Web App</h5>
+                            <p>A full-stack real estate application with user authentication, estates management, and admin panel.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Angular</span>
+                                <span class="tech-badge">SpringBoot</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">Bootstrap</span>
+                                <span class="tech-badge">SweetAlert2</span>
+
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://github.com/TOUMI-ACHREF/TuniCasa-WebApp" class="btn btn-gradient btn-sm me-2">View GitHub folder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 animate-on-scroll">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="project-content">
+                            <h5>ML based CAN Attacks Simulator</h5>
+                            <p>A Web CAN Attacks simulator that predict the attack from a CAN data packets.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML</span>
+                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">JS</span>
+                                <span class="tech-badge">Express</span>
+                                <span class="tech-badge">Flask</span>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://github.com/TOUMI-ACHREF/Detect-CAN-Attacks" class="btn btn-gradient btn-sm me-2">View GitHub folder</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 animate-on-scroll">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="project-content">
+                            <h5>IOT project with Data visualization Dashboard</h5>
+                            <p>Chimical LAB is an IoT project designed to enhance laboratory safety by monitoring critical environmental parameters.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">C++/Arduino</span>
+                                <span class="tech-badge">express</span>
+                                <span class="tech-badge">HTML</span>
+                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">MongoDB Atlas</span>
+                            </div>
+                            <div class="mt-3">                                
+                                <a href="https://github.com/TOUMI-ACHREF/IOT-Chimical-LAB" class="btn btn-gradient btn-sm me-2">View GitHub folder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 animate-on-scroll">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="project-content">
+                            <h5>Tic Tac Toe Game</h5>
+                            <p>A Client/Server Java Distributed Game, support two players to lunch a game as Clients and all the logic is sent by the server.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">JAVA</span>
+                                <span class="tech-badge">Sockets</span>
+                                <span class="tech-badge">TCP</span>
+                                <span class="tech-badge">No Middelware</span>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://github.com/TOUMI-ACHREF/Tic-Tac-Toe" class="btn btn-gradient btn-sm me-2">View GitHub folder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 animate-on-scroll">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="project-content">
+                            <h5>Golden-Studio Streaming Desktop App</h5>
+                            <p>A Streaming app similar to Netflix implemented with Java without any framework.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">JAVA</span>
+                                <span class="tech-badge">JavaFX</span>
+                                <span class="tech-badge">MySql</span>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://github.com/TOUMI-ACHREF/Golden-Studio" class="btn btn-gradient btn-sm me-2">View GitHub folder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center animate-on-scroll">
+                    <a href="https://github.com/TOUMI-ACHREF?tab=repositories" class="btn btn-gradient btn-sm me-2 ">View More Projects...</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Experience</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="experience-item animate-on-scroll">
+                        <div class="experience-date">Summer 2025</div>
+                        <h5>Software Developer Intern</h5>
+                        <h6 class="">ANCE-TUNTRUST.</h6>
+                        <ul class="mt-3">
+                            <li>Developed a web application that integrates the company’s ERP system with its corporate website.</li>
+                            <li>Designed and implemented a microservices-based backend using Spring Boot, exposing RESTful APIs.</li>
+                            <li>Built an interactive dashboard UI using Angular for data visualization and system monitoring.</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item animate-on-scroll">
+                        <div class="experience-date">Summer 2024</div>
+                        <h5>Odoo Developer Intern</h5>
+                        <h6 class="">ABSHORE.</h6>
+                        <ul class="mt-3">
+                            <li>Designed and developed a Help Desk module within the Odoo ERP system.</li>
+                            <li>Participated in the software design process, including data model definition and module architecture.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-item animate-on-scroll">
+                        <div class="experience-date">2021 - Present</div>
+                        <h5>Software and Data Engineering Student</h5>
+                        <h6 class="">Faculty of science of Bizerte</h6>
+                        <ul class="mt-3">
+                            <li>Relevant Coursework: Data Structures, Algorithms, Database Systems, Ai, Machine Learning</li>
+                            <li>Web Development, Software Engineering, Computer Networks, Data Engineering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title text-white animate-on-scroll">Get In Touch</h2>
+            <div class="row text-center">
+                <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h5>Email</h5>
+                        <p>toumiachref52@gmail.com</p>
+                        <a href="mailto:toumiachref52@gmail.com" class="btn btn-gradient btn-sm">Send Email</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h5>LinkedIn</h5>
+                        <p>Connect with me professionally</p>
+                        <a href="https://www.linkedin.com/in/toumi-achref/" class="btn btn-gradient btn-sm" target="_blank">View Profile</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h5>GitHub</h5>
+                        <p>Check out my code repositories</p>
+                        <a href="https://github.com/TOUMI-ACHREF" class="btn btn-gradient btn-sm" target="_blank">View GitHub</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto animate-on-scroll">
+                    <div class="text-center mb-4">
+                        <h4>Let's Work Together</h4>
+                        <p>I'm always interested in new opportunities, challenging projects, and creative collaborations.</p>
+                    </div>
+                    <form class="contact-form" onsubmit="sendMail(event)">
+                        <div class="row g-3">
+
+                            <!-- Name -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                                    <label for="name">Your Name</label>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+
+                            <!-- Subject -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                                    <label for="subject">Subject</label>
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="message" placeholder="Your Message" style="height: 120px" required></textarea>
+                                    <label for="message">Your Message</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-gradient btn-lg">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/TOUMI-ACHREF" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/toumi-achref/" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/achref_toumy/" class="social-link" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:toumiachref52@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p>&copy; 2024 Toumi Achref. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <!-- EmailJS library -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = '#201335';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'transparent';
+            }
+        });
+
+        // Animate progress bars when in viewport
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate scroll elements
+                    if (entry.target.classList.contains('animate-on-scroll')) {
+                        entry.target.classList.add('animated');
+                    }
+                    
+                    // Animate progress bars
+                    const progressBars = entry.target.querySelectorAll('.progress-bar');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 300);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animation
+        document.querySelectorAll('.animate-on-scroll, .skill-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact form handling
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Simple validation
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Show success message (in real implementation, you'd send this to a server)
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            this.reset();
+        });
+
+        // Add typing effect to hero text
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on page load
+        window.addEventListener('load', function() {
+            const heroTitle = document.querySelector('.hero h1');
+            const originalText = heroTitle.textContent;
+            setTimeout(() => {
+                typeWriter(heroTitle, originalText, 100);
+            }, 500);
+        });
+
+        // Add particle background effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 4px;
+                height: 4px;
+                background: rgba(99, 102, 241, 0.3);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: -1;
+                animation: particleFloat 3s linear forwards;
+            `;
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = '100vh';
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 3000);
+        }
+
+        // Add particle animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particleFloat {
+                to {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+
+        // Add hover effects for skill items
+        document.querySelectorAll('.skill-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click effect for buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation CSS
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        (function () {
+            emailjs.init("OMfzObTmkTRC76_bf");
+        })();
+
+        function sendMail(event) {
+        event.preventDefault();
+
+        const params = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            title: document.getElementById("subject").value,
+            message: document.getElementById("message").value,
+        };
+
+        emailjs
+            .send("service_pxcy74r", "template_0e9rrvb", params)
+            .then(() => {
+            alert("Message sent");
+            document.querySelector(".contact-form").reset();
+            })
+            .catch(() => {
+            alert("Error sending message");
+            });
+        }
+
+
+    </script>
+</body>
+</html>
